@@ -5,32 +5,15 @@ pipeline {
         HOME="." 
     }
     stages {
-        stage('Install') {
+        stage("Test & Build") { 
             agent {
                 dockerfile true
             }
             steps {
                 sh 'npm install'
-            }
-        }
-
-        stage('Test') {
-            agent {
-                dockerfile true
-            }    
-            steps {
-                sh 'npm run test'
-            }
-        }
-
-        stage('Build') {
-            agent {
-                dockerfile true
-            } 
-            steps {
+                sh 'npm test'
                 sh 'npm run build'
-            }
+            }      
         }
-      
     }
 }
