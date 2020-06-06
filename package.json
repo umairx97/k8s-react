@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "docker:image": "docker build -t umairx97/k8s-react .",
-    "docker:container": "docker run -d --name k8s-react -p 3000:80 umairx97/k8s-react", 
+    "docker:container": "docker run -d --rm --name k8s-react -p 3000:80 umairx97/k8s-react", 
     "deploy:docker": "npm run docker:image && npm run docker:container",
     "build": "react-scripts build",
     "test": "react-scripts test",
