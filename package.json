@@ -12,6 +12,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build:docker": "docker build -t umairx97/k8s-react .",
+    "docker:container": "docker run -d --name k8s-react -p 3000:80 umairx97/k8s-react",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
