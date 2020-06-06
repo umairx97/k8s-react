@@ -10,7 +10,10 @@ pipeline {
     stages {
         stage("Test & Build") { 
             agent {
-                dockerfile true
+              docker { 
+                  image 'node:lts-alpine3.9'
+                  args '-p 3000:3000' 
+              }
             }
             steps {
                 sh 'npm install'
