@@ -1,26 +1,36 @@
 pipeline {
-    agent {
-      dockerfile true
-    }
+    agent none
     environment {
-        CI = 'true' 
+        CI='true' 
         HOME="." 
     }
     stages {
-      stage('Install') {
+        stage('Install') {
+            agent {
+                dockerfile true
+            }
             steps {
                 sh 'npm install'
             }
         }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
-      stage('Test') {
+
+        stage('Test') {
+            agent {
+                dockerfile true
+            }    
             steps {
                 sh 'npm run test'
             }
         }
+
+        stage('Build') {
+            agent {
+                dockerfile true
+            } 
+            steps {
+                sh 'npm run build'
+            }
+        }
+      
     }
 }
