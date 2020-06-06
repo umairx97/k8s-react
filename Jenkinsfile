@@ -1,18 +1,15 @@
 pipeline {
     agent {
-        docker {
-            image 'node:12-alpine'
-            args '-p 3000:3000'
-        }
+      dockerfile true
     }
     environment {
         CI = 'true' 
         HOME="." 
     }
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                sh 'npm install'
+                sh 'npm run test'
             }
         }
     }
