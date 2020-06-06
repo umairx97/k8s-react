@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment {
         CI='true' 
         HOME="." 
@@ -41,6 +41,11 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+        stage('Remove Unused docker image') {
+            steps {
+                sh "docker rmi $dockerRegistry:$BUILD_NUMBER"
             }
         }
     }
