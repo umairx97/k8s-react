@@ -12,9 +12,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "docker:image": "docker build -t umairx97/k8s-react .",
-    "docker:container": "docker run -d --rm --name k8s-react -p 3000:80 umairx97/k8s-react",
+    "docker:image": "docker build -t umairx97/k8s-react:LTS .",
+    "docker:container": "docker run -d --rm --name k8s-react -p 3000:80 umairx97/k8s-react:LTS",
     "deploy:docker": "npm run docker:image && npm run docker:container",
+    "deploy:kubernetes": "./deploy.sh",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
