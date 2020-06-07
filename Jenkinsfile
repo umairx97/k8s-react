@@ -27,7 +27,7 @@ pipeline {
             }      
         }
 
-        stage("Build and Push Docker Image") {
+        stage("Docker") {
             when {
                 branch 'master'
             }
@@ -37,7 +37,7 @@ pipeline {
                         echo registryCredential
                         echo dockerRegistry
                         script { 
-                            dockerImage = docker.build dockerRegistry + ":$BUILD_NUMBER"
+                            dockerImage = docker.build dockerRegistry + ":LTS"
                         }
                         
                     }
@@ -52,16 +52,14 @@ pipeline {
                         }
                     }
                 }
+                stage('Remove Unused docker image') {
+                    steps {
+                        sh "docker rmi $dockerRegistry:$BUILD_NUMBER"
+                    }
+                }
             }
         }
-        stage('Remove Unused docker image') {
-            when {
-                branch 'master'
-            }
-            steps {
-                sh "docker rmi $dockerRegistry:$BUILD_NUMBER"
-            }
-        }
+
     }
 
     post {
