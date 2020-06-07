@@ -23,6 +23,9 @@ pipeline {
         }
 
         stage("Build and Push Docker Image") {
+            when {
+                branch 'master'
+            }
             stages { 
                 stage("Build Image") { 
                     steps {
@@ -47,6 +50,9 @@ pipeline {
             }
         }
         stage('Remove Unused docker image') {
+            when {
+                branch 'master'
+            }
             steps {
                 sh "docker rmi $dockerRegistry:$BUILD_NUMBER"
             }
