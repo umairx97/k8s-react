@@ -3,10 +3,6 @@ def COLOR_MAP = [
     'FAILURE': 'danger',
 ]
 
-def getBuildUser() {
-    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
-}
-
 pipeline {
     agent any
     environment {
@@ -70,12 +66,9 @@ pipeline {
 
     post {
         always {
-            script {
-                BUILD_USER = getBuildUser()
-            }
             slackSend channel: '#lets-learn-notice',
                 color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} Branch: ${env.BRANCH_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
         }
     }
 }
